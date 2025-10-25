@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
 
   # Rails dependencies
   spec.add_dependency "rails", ">= 6.0.0"
+  spec.add_dependency "kaminari", ">= 1.0.0"
 
   # Development dependencies
   spec.add_development_dependency "sqlite3", "~> 1.4"

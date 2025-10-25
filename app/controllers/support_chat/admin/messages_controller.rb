@@ -3,6 +3,8 @@
 module SupportChat
   module Admin
     class MessagesController < BaseController
+      skip_before_action :verify_authenticity_token
+
       def create
         @conversation = Conversation.find(params[:conversation_id])
         @message = @conversation.messages.new(
@@ -12,9 +14,9 @@ module SupportChat
         )
 
         if @message.save
-          head :created
+          redirect_to admin_conversation_path(@conversation), notice: "Message sent"
         else
-          render json: { errors: @message.errors.full_messages }, status: :unprocessable_entity
+          redirect_to admin_conversation_path(@conversation), alert: "Failed to send message"
         end
       end
     end

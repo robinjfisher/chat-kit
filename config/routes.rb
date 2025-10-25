@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 SupportChat::Engine.routes.draw do
+  # ActionCable endpoint for real-time messaging
+  mount ActionCable.server => "/cable"
+
   # Widget API endpoints (public, token-authenticated)
-  namespace :widget do
+  scope :widget, as: :widget do
     get "config", to: "widget#config"
     post "conversations", to: "widget#create_conversation"
     post "messages", to: "widget#create_message"

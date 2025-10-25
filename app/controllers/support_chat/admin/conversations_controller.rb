@@ -8,7 +8,6 @@ module SupportChat
         @conversations = Conversation.where(status: status_filter)
                                      .recent
                                      .page(params[:page])
-                                     .per(25)
 
         # Mark messages as read by agent when viewing list
         unread_message_ids = @conversations.flat_map do |conv|

@@ -62,10 +62,47 @@
   <% end %>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@rails/actioncable@7.0/app/assets/javascripts/actioncable.js"></script>
 <script>
   // Auto-scroll to bottom of messages
   const container = document.getElementById('messages-container');
   if (container) {
     container.scrollTop = container.scrollHeight;
+  }
+
+  // Subscribe to agents dashboard for real-time updates
+  const cable = ActionCable.createConsumer('/support_chat/cable');
+  const conversationId = <%= @conversation.id %>;
+
+  cable.subscriptions.create(
+    { channel: 'SupportChat::AgentChannel' },
+    {
+      received: function(data) {
+        // Only show messages for this conversation
+        if (data.conversation_id === conversationId) {
+          const messagesContainer = document.getElementById('messages-container');
+          const messageEl = document.createElement('div');
+          messageEl.className = 'message message-' + data.message.sender_type;
+
+          const senderName = data.message.sender_type === 'guest' ? '<%= @conversation.guest_name %>' : 'Support Agent';
+          const time = new Date(data.message.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+          messageEl.innerHTML = `
+            <div class="message-sender">${senderName}</div>
+            <div class="message-content">${escapeHtml(data.message.content)}</div>
+            <div class="message-time">${time}</div>
+          `;
+
+          messagesContainer.appendChild(messageEl);
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+      }
+    }
+  );
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
   }
 </script>

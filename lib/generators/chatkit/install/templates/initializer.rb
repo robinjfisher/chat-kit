@@ -9,6 +9,14 @@ SupportChat.configure do |config|
   # This should match the method your application uses (e.g., :current_user, :current_admin)
   config.current_user_method = :current_user
 
+  # OPTIONAL: Provide a proc to fetch the current user (advanced)
+  # Use this if your authentication system isn't automatically detected
+  # The proc receives the controller instance as an argument
+  # Example:
+  #   config.current_user_proc = ->(controller) { controller.send(:current_user) }
+  # If not set, the gem will try to auto-detect from session (works with Devise, Authlogic, etc.)
+  # config.current_user_proc = nil
+
   # REQUIRED: Method to check if a user is a support agent
   # You must implement this method on your user model
   # Example in app/models/user.rb:

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "kaminari"
 require_relative "chatkit/version"
 require_relative "chatkit/configuration"
 require_relative "chatkit/engine"

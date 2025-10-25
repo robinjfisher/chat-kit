@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module SupportChat
-  class Setting < ApplicationRecord
+  class Setting < SupportChat::ApplicationRecord
     self.table_name = "support_chat_settings"
 
     validates :widget_token, presence: true, uniqueness: true
@@ -11,7 +11,9 @@ module SupportChat
     before_validation :generate_widget_token, on: :create
 
     def self.current
-      first_or_create!(widget_token: SecureRandom.urlsafe_base64(32))
+      Rails.cache.fetch("support_chat_settings_current", expires_in: 1.hour) do
+        first_or_create!(widget_token: SecureRandom.urlsafe_base64(32))
+      end
     end
 
     private

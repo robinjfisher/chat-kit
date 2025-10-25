@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module SupportChat
-  class GuestChannel < ApplicationCable::Channel
+  class GuestChannel < SupportChat::ApplicationCable::Channel
     def subscribed
       signed_token = params[:session_token]
 

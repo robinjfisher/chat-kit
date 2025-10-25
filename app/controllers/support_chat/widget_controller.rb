@@ -1,9 +1,20 @@
 # frozen_string_literal: true
 
 module SupportChat
-  class WidgetController < ApplicationController
+  class WidgetController < ActionController::Base
     skip_before_action :verify_authenticity_token
     before_action :verify_widget_token
+
+    # Disable parameter wrapping to avoid params being nested under "widget" key
+    wrap_parameters false
+
+    # Disable instrumentation to avoid conflicts with host app gems like active_decorator
+    self._process_action_callbacks = []
+
+    # Provide a simple logger to avoid triggering host app's logger chain
+    def logger
+      @logger ||= Rails.logger
+    end
 
     def config
       setting = Setting.current

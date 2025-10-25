@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 module SupportChat
-  class Conversation < ApplicationRecord
+  class Conversation < SupportChat::ApplicationRecord
     self.table_name = "support_chat_conversations"
+
+    # Kaminari pagination configuration
+    paginates_per 25
 
     has_many :messages, dependent: :destroy
 

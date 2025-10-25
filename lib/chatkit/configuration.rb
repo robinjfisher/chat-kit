@@ -4,6 +4,7 @@ module SupportChat
   class Configuration
     attr_accessor :user_class,
                   :current_user_method,
+                  :current_user_proc,
                   :support_agent_method,
                   :mailer_sender,
                   :email_notifications,
@@ -12,6 +13,7 @@ module SupportChat
     def initialize
       @user_class = "User"
       @current_user_method = :current_user
+      @current_user_proc = nil # Proc that receives controller as argument
       @support_agent_method = :support_agent?
       @mailer_sender = "support@example.com"
       @email_notifications = true

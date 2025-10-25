@@ -14,12 +14,15 @@ module SupportChat
         businessName: options[:business_name] || setting.business_name
       }
 
+      # Load ActionCable from CDN since host app might not have it
+      # Load widget assets using asset pipeline helpers
       html = <<~HTML
+        <link rel="stylesheet" href="/assets/support_chat/widget.css" />
+        <script src="https://cdn.jsdelivr.net/npm/@rails/actioncable@7.0/app/assets/javascripts/actioncable.js"></script>
         <script>
           window.__SupportChatConfig__ = #{config.to_json};
         </script>
-        #{javascript_include_tag "support_chat/widget"}
-        #{stylesheet_link_tag "support_chat/widget"}
+        <script src="/assets/support_chat/widget.js"></script>
       HTML
 
       html.html_safe
@@ -29,8 +32,7 @@ module SupportChat
 
     def support_chat_engine_url
       # Get the mounted engine URL
-      main_app.url_for(controller: "support_chat/widget", action: "config", only_path: true)
-              .split("/widget").first
+      SupportChat::Engine.routes.url_helpers.widget_config_path.split("/widget").first
     end
   end
 end

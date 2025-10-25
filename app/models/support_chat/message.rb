@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module SupportChat
-  class Message < ApplicationRecord
+  class Message < SupportChat::ApplicationRecord
     self.table_name = "support_chat_messages"
 
     belongs_to :conversation, class_name: "SupportChat::Conversation"
