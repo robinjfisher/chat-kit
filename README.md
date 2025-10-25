@@ -92,6 +92,40 @@ SupportChat.configure do |config|
 end
 ```
 
+### Authentication Configuration
+
+ChatKit attempts to auto-detect your authentication system (Devise, Authlogic, etc.) by checking common session keys. However, if you're using a custom authentication system or the auto-detection doesn't work, you can provide a `current_user_proc`:
+
+```ruby
+SupportChat.configure do |config|
+  # ... other config ...
+
+  # For Authlogic
+  config.current_user_proc = lambda do |controller|
+    user_session = UserSession.find
+    user_session&.user
+  end
+
+  # For Devise (auto-detected, but can be explicit)
+  config.current_user_proc = lambda do |controller|
+    controller.current_user
+  end
+
+  # For custom authentication
+  config.current_user_proc = lambda do |controller|
+    # Your custom logic to fetch the current user
+    # The proc receives the controller instance as an argument
+    controller.send(:your_current_user_method)
+  end
+end
+```
+
+**When to use `current_user_proc`:**
+- You're using Authlogic or another non-Devise authentication system
+- Auto-detection fails in your application
+- You have a custom authentication implementation
+- You want explicit control over how the current user is fetched
+
 ## Widget Customization
 
 You can customize the widget appearance when embedding it:
@@ -172,6 +206,7 @@ For single-server deployments, the async adapter works fine (no Redis required).
 - Ruby >= 2.7.0
 - Rails >= 6.0.0
 - PostgreSQL, MySQL, or SQLite
+- Kaminari >= 1.0.0 (for pagination - automatically installed as dependency)
 
 ## Development
 
