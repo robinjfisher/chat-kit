@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #1F2937;
+      background-color: #F9FAFB;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .email-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      background-color: #4F46E5;
+      color: white;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .content {
+      padding: 32px 24px;
+    }
+
+    .greeting {
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    .intro {
+      color: #6B7280;
+      margin-bottom: 24px;
+    }
+
+    .message {
+      background-color: #F3F4F6;
+      border-left: 4px solid #4F46E5;
+      padding: 16px;
+      margin-bottom: 16px;
+      border-radius: 4px;
+    }
+
+    .message-time {
+      font-size: 12px;
+      color: #9CA3AF;
+      margin-bottom: 8px;
+    }
+
+    .message-content {
+      font-size: 14px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #4F46E5;
+      color: white;
+      padding: 12px 32px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    .footer {
+      background-color: #F9FAFB;
+      padding: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: #9CA3AF;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="header">
+      <h1><%= @setting.business_name || 'Support Team' %></h1>
+    </div>
+
+    <div class="content">
+      <div class="greeting">
+        Hi <%= @conversation.guest_name %>,
+      </div>
+
+      <div class="intro">
+        <%= @messages.count > 1 ? "You have new replies" : "You have a new reply" %> to your support conversation:
+      </div>
+
+      <% @messages.each do |message| %>
+        <div class="message">
+          <div class="message-time">
+            <%= message.created_at.strftime("%B %d at %I:%M %p") %>
+          </div>
+          <div class="message-content">
+            <%= message.content %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if @conversation.page_url.present? %>
+        <a href="<%= @conversation.page_url %>" class="cta-button">
+          Continue Conversation
+        </a>
+      <% end %>
+
+      <p style="color: #6B7280; font-size: 14px; margin-top: 24px;">
+        Reply by visiting the page where you started the conversation. Your chat history will be automatically restored.
+      </p>
+    </div>
+
+    <div class="footer">
+      <p>This is an automated notification from <%= @setting.business_name || 'our support system' %>.</p>
+      <p>You received this email because you started a support conversation with us.</p>
+    </div>
+  </div>
+</body>
+</html>

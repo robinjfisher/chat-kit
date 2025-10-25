@@ -1,0 +1,23 @@
+Hi <%= @conversation.guest_name %>,
+
+<%= @messages.count > 1 ? "You have new replies" : "You have a new reply" %> to your support conversation:
+
+<% @messages.each do |message| %>
+---
+<%= message.created_at.strftime("%B %d at %I:%M %p") %>
+
+<%= message.content %>
+
+<% end %>
+---
+
+<% if @conversation.page_url.present? %>
+Continue the conversation at: <%= @conversation.page_url %>
+<% end %>
+
+Reply by visiting the page where you started the conversation. Your chat history will be automatically restored.
+
+---
+
+This is an automated notification from <%= @setting.business_name || 'our support system' %>.
+You received this email because you started a support conversation with us.

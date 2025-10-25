@@ -1,0 +1,33 @@
+===============================================================================
+
+ChatKit has been installed!
+
+Next steps:
+
+1. Run migrations:
+   rails db:migrate
+
+2. Configure your user model:
+   Add a support_agent? method to your User model (or whatever model you specified)
+
+   Example in app/models/user.rb:
+
+   def support_agent?
+     # Implement your logic here
+     self.admin? || self.role == 'support'
+   end
+
+3. Add the widget to your layout:
+   In app/views/layouts/application.html.erb, add before </body>:
+
+   <%= chatkit_widget %>
+
+4. Customize settings (optional):
+   Edit config/initializers/chatkit.rb
+
+5. Access the admin dashboard:
+   Visit /support_chat/admin/conversations (requires authentication)
+
+For more information, visit: https://github.com/robinfisher/chatkit
+
+===============================================================================

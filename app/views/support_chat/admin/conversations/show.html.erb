@@ -1,0 +1,71 @@
+<% content_for :title, "Conversation with #{@conversation.guest_name}" %>
+
+<% if notice %>
+  <div class="notice"><%= notice %></div>
+<% end %>
+
+<div class="conversation-detail">
+  <div class="conversation-info">
+    <div class="info-row">
+      <span class="info-label">Guest:</span>
+      <span><%= @conversation.guest_name %> (<%= @conversation.guest_email %>)</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Started:</span>
+      <span><%= @conversation.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
+    </div>
+    <% if @conversation.page_url.present? %>
+      <div class="info-row">
+        <span class="info-label">Page:</span>
+        <span><%= link_to @conversation.page_url, @conversation.page_url, target: "_blank" %></span>
+      </div>
+    <% end %>
+    <div class="info-row">
+      <span class="info-label">Status:</span>
+      <span style="text-transform: capitalize;"><%= @conversation.status %></span>
+    </div>
+  </div>
+
+  <div class="messages-container" id="messages-container">
+    <% @messages.each do |message| %>
+      <div class="message message-<%= message.sender_type %>">
+        <div class="message-sender">
+          <%= message.sender_type == "guest" ? @conversation.guest_name : "Support Agent" %>
+        </div>
+        <div class="message-content"><%= message.content %></div>
+        <div class="message-time">
+          <%= message.created_at.strftime("%I:%M %p") %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @conversation.status == "open" %>
+    <%= form_with url: admin_conversation_messages_path(@conversation),
+                  method: :post,
+                  class: "reply-form",
+                  data: { turbo: false } do |form| %>
+      <%= form.text_area :content,
+                        placeholder: "Type your reply...",
+                        required: true %>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <%= form.submit "Send", class: "btn btn-primary" %>
+        <%= button_to "Close",
+                     close_admin_conversation_path(@conversation),
+                     method: :post,
+                     class: "btn btn-secondary",
+                     data: { confirm: "Close this conversation?" } %>
+      </div>
+    <% end %>
+  <% else %>
+    <p style="text-align: center; color: #9CA3AF;">This conversation is closed</p>
+  <% end %>
+</div>
+
+<script>
+  // Auto-scroll to bottom of messages
+  const container = document.getElementById('messages-container');
+  if (container) {
+    container.scrollTop = container.scrollHeight;
+  }
+</script>

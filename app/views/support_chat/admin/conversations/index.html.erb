@@ -1,0 +1,36 @@
+<% content_for :title, "Conversations" %>
+
+<div class="tabs">
+  <%= link_to "Open", admin_conversations_path(status: "open"),
+      class: "tab #{params[:status] != 'closed' ? 'active' : ''}" %>
+  <%= link_to "Closed", admin_conversations_path(status: "closed"),
+      class: "tab #{params[:status] == 'closed' ? 'active' : ''}" %>
+</div>
+
+<div class="conversation-list">
+  <% if @conversations.any? %>
+    <% @conversations.each do |conversation| %>
+      <%= link_to admin_conversation_path(conversation), class: "conversation-item" do %>
+        <div class="conversation-header">
+          <div class="conversation-guest">
+            <%= conversation.guest_name %>
+            <% if conversation.agent_unread_count > 0 %>
+              <span class="unread-badge"><%= conversation.agent_unread_count %></span>
+            <% end %>
+          </div>
+          <div class="conversation-time">
+            <%= time_ago_in_words(conversation.last_message_at || conversation.created_at) %> ago
+          </div>
+        </div>
+        <div class="conversation-preview">
+          <%= conversation.guest_email %> •
+          <%= conversation.messages.last&.content&.truncate(60) || "No messages yet" %>
+        </div>
+      <% end %>
+    <% end %>
+  <% else %>
+    <div class="empty-state">
+      <p>No <%= params[:status] == 'closed' ? 'closed' : 'open' %> conversations</p>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,1001 @@
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-10-25 14:35:24.096628', '2025-10-25 14:35:24.096631') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20251025000001)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar NOT NULL, "role" varchar DEFAULT 'user', "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251025000001') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "email" varchar NOT NULL, "role" varchar DEFAULT 'user', "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251025000001)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-10-25 14:37:10.374224', '2025-10-25 14:37:10.374224') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '1027049a4410a1b3323c4d779b8d49de221c491b', '2025-10-25 14:37:10.374530', '2025-10-25 14:37:10.374531') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateSupportChatConversations (20251025000002)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "support_chat_conversations" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "guest_name" varchar NOT NULL, "guest_email" varchar NOT NULL, "session_token" varchar NOT NULL, "status" varchar DEFAULT 'open' NOT NULL, "page_url" varchar, "last_message_at" datetime, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_conversations_on_session_token" ON "support_chat_conversations" ("session_token")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_status" ON "support_chat_conversations" ("status")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_last_message_at" ON "support_chat_conversations" ("last_message_at")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251025000002') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to CreateSupportChatMessages (20251025000003)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "conversation_id" integer NOT NULL, "sender_type" varchar NOT NULL, "agent_id" bigint, "content" text NOT NULL, "read_by_guest" boolean DEFAULT FALSE, "read_by_agent" boolean DEFAULT FALSE, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_fa9c5b415b"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "support_chat_conversations" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251025000003') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to CreateSupportChatSettings (20251025000004)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "widget_token" varchar NOT NULL, "primary_color" varchar DEFAULT '#4F46E5', "widget_position" varchar DEFAULT 'bottom-right', "greeting_message" varchar DEFAULT 'Hi! How can we help you today?', "business_name" varchar, "enabled" boolean DEFAULT TRUE, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_settings_on_widget_token" ON "support_chat_settings" ("widget_token")[0m
+  [1m[36mSupportChat::Setting Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_settings" WHERE "support_chat_settings"."widget_token" = ? LIMIT ?[0m  [["widget_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mSupportChat::Setting Create (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_settings" ("widget_token", "primary_color", "widget_position", "greeting_message", "business_name", "enabled", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["widget_token", "[FILTERED]"], ["primary_color", "#4F46E5"], ["widget_position", "bottom-right"], ["greeting_message", "Hi! How can we help you today?"], ["business_name", nil], ["enabled", 1], ["created_at", "2025-10-25 14:38:09.484180"], ["updated_at", "2025-10-25 14:38:09.484180"]]
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251025000004') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_conversations"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "support_chat_conversations" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "guest_email" varchar NOT NULL, "guest_name" varchar NOT NULL, "last_message_at" datetime, "page_url" varchar, "session_token" varchar NOT NULL, "status" varchar DEFAULT 'open' NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_last_message_at" ON "support_chat_conversations" ("last_message_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_conversations_on_session_token" ON "support_chat_conversations" ("session_token")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_status" ON "support_chat_conversations" ("status")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_settings"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "business_name" varchar, "created_at" datetime(6) NOT NULL, "enabled" boolean DEFAULT TRUE, "greeting_message" varchar DEFAULT 'Hi! How can we help you today?', "primary_color" varchar DEFAULT '#4F46E5', "updated_at" datetime(6) NOT NULL, "widget_position" varchar DEFAULT 'bottom-right', "widget_token" varchar NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_settings_on_widget_token" ON "support_chat_settings" ("widget_token")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "email" varchar NOT NULL, "role" varchar DEFAULT 'user', "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "asupport_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id" ON "asupport_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id_and_created_at" ON "asupport_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "asupport_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "support_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "support_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_fa9c5b415b"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "support_chat_conversations" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "asupport_chat_messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "asupport_chat_messages"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251025000004)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251025000003),
+(20251025000002),
+(20251025000001);[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-10-25 15:25:31.441751', '2025-10-25 15:25:31.441752') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'c1a5973fd81403b2728018be79a1bf3fd71a9cc2', '2025-10-25 15:25:31.442129', '2025-10-25 15:25:31.442130') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_conversations"[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "support_chat_conversations" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "guest_email" varchar NOT NULL, "guest_name" varchar NOT NULL, "last_message_at" datetime, "page_url" varchar, "session_token" varchar NOT NULL, "status" varchar DEFAULT 'open' NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_last_message_at" ON "support_chat_conversations" ("last_message_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_conversations_on_session_token" ON "support_chat_conversations" ("session_token")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_status" ON "support_chat_conversations" ("status")[0m
+  [1m[35m (4.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_conversations"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_messages"[0m
+  [1m[35m (6.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_conversations"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "support_chat_conversations" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "guest_email" varchar NOT NULL, "guest_name" varchar NOT NULL, "last_message_at" datetime, "page_url" varchar, "session_token" varchar NOT NULL, "status" varchar DEFAULT 'open' NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_conversations"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "support_chat_conversations" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "guest_email" varchar NOT NULL, "guest_name" varchar NOT NULL, "last_message_at" datetime, "page_url" varchar, "session_token" varchar NOT NULL, "status" varchar DEFAULT 'open' NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_last_message_at" ON "support_chat_conversations" ("last_message_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_conversations_on_session_token" ON "support_chat_conversations" ("session_token")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_conversations"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "support_chat_conversations" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "guest_email" varchar NOT NULL, "guest_name" varchar NOT NULL, "last_message_at" datetime, "page_url" varchar, "session_token" varchar NOT NULL, "status" varchar DEFAULT 'open' NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_last_message_at" ON "support_chat_conversations" ("last_message_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_conversations_on_session_token" ON "support_chat_conversations" ("session_token")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_conversations"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_status" ON "support_chat_conversations" ("status")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_last_message_at" ON "support_chat_conversations" ("last_message_at")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "support_chat_conversations" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "guest_email" varchar NOT NULL, "guest_name" varchar NOT NULL, "last_message_at" datetime, "page_url" varchar, "session_token" varchar NOT NULL, "status" varchar DEFAULT 'open' NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_last_message_at" ON "support_chat_conversations" ("last_message_at")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_status" ON "support_chat_conversations" ("status")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_conversations_on_session_token" ON "support_chat_conversations" ("session_token")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_conversations_on_session_token" ON "support_chat_conversations" ("session_token")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "support_chat_conversations" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "guest_email" varchar NOT NULL, "guest_name" varchar NOT NULL, "last_message_at" datetime, "page_url" varchar, "session_token" varchar NOT NULL, "status" varchar DEFAULT 'open' NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_messages"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_conversations"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_last_message_at" ON "support_chat_conversations" ("last_message_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_conversations_on_session_token" ON "support_chat_conversations" ("session_token")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_status" ON "support_chat_conversations" ("status")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_messages"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_conversations"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_status" ON "support_chat_conversations" ("status")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "support_chat_conversations" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "guest_email" varchar NOT NULL, "guest_name" varchar NOT NULL, "last_message_at" datetime, "page_url" varchar, "session_token" varchar NOT NULL, "status" varchar DEFAULT 'open' NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_last_message_at" ON "support_chat_conversations" ("last_message_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_conversations_on_session_token" ON "support_chat_conversations" ("session_token")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_status" ON "support_chat_conversations" ("status")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_messages"[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_status" ON "support_chat_conversations" ("status")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_conversations"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_settings"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "business_name" varchar, "created_at" datetime(6) NOT NULL, "enabled" boolean DEFAULT TRUE, "greeting_message" varchar DEFAULT 'Hi! How can we help you today?', "primary_color" varchar DEFAULT '#4F46E5', "updated_at" datetime(6) NOT NULL, "widget_position" varchar DEFAULT 'bottom-right', "widget_token" varchar NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_settings"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_settings_on_widget_token" ON "support_chat_settings" ("widget_token")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "business_name" varchar, "created_at" datetime(6) NOT NULL, "enabled" boolean DEFAULT TRUE, "greeting_message" varchar DEFAULT 'Hi! How can we help you today?', "primary_color" varchar DEFAULT '#4F46E5', "updated_at" datetime(6) NOT NULL, "widget_position" varchar DEFAULT 'bottom-right', "widget_token" varchar NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "support_chat_conversations" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "guest_email" varchar NOT NULL, "guest_name" varchar NOT NULL, "last_message_at" datetime, "page_url" varchar, "session_token" varchar NOT NULL, "status" varchar DEFAULT 'open' NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_settings_on_widget_token" ON "support_chat_settings" ("widget_token")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "email" varchar NOT NULL, "role" varchar DEFAULT 'user', "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_last_message_at" ON "support_chat_conversations" ("last_message_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "email" varchar NOT NULL, "role" varchar DEFAULT 'user', "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "support_chat_conversations" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "guest_email" varchar NOT NULL, "guest_name" varchar NOT NULL, "last_message_at" datetime, "page_url" varchar, "session_token" varchar NOT NULL, "status" varchar DEFAULT 'open' NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_conversations_on_session_token" ON "support_chat_conversations" ("session_token")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_status" ON "support_chat_conversations" ("status")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_last_message_at" ON "support_chat_conversations" ("last_message_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_conversations_on_session_token" ON "support_chat_conversations" ("session_token")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_status" ON "support_chat_conversations" ("status")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_conversations"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_settings"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "business_name" varchar, "created_at" datetime(6) NOT NULL, "enabled" boolean DEFAULT TRUE, "greeting_message" varchar DEFAULT 'Hi! How can we help you today?', "primary_color" varchar DEFAULT '#4F46E5', "updated_at" datetime(6) NOT NULL, "widget_position" varchar DEFAULT 'bottom-right', "widget_token" varchar NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_settings_on_widget_token" ON "support_chat_settings" ("widget_token")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "email" varchar NOT NULL, "role" varchar DEFAULT 'user', "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "support_chat_conversations" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "guest_email" varchar NOT NULL, "guest_name" varchar NOT NULL, "last_message_at" datetime, "page_url" varchar, "session_token" varchar NOT NULL, "status" varchar DEFAULT 'open' NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_last_message_at" ON "support_chat_conversations" ("last_message_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "asupport_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_conversations_on_session_token" ON "support_chat_conversations" ("session_token")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_conversations"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_status" ON "support_chat_conversations" ("status")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_settings"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id" ON "asupport_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "business_name" varchar, "created_at" datetime(6) NOT NULL, "enabled" boolean DEFAULT TRUE, "greeting_message" varchar DEFAULT 'Hi! How can we help you today?', "primary_color" varchar DEFAULT '#4F46E5', "updated_at" datetime(6) NOT NULL, "widget_position" varchar DEFAULT 'bottom-right', "widget_token" varchar NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id_and_created_at" ON "asupport_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_settings_on_widget_token" ON "support_chat_settings" ("widget_token")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_settings"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "asupport_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "support_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "support_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_settings"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "asupport_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "business_name" varchar, "created_at" datetime(6) NOT NULL, "enabled" boolean DEFAULT TRUE, "greeting_message" varchar DEFAULT 'Hi! How can we help you today?', "primary_color" varchar DEFAULT '#4F46E5', "updated_at" datetime(6) NOT NULL, "widget_position" varchar DEFAULT 'bottom-right', "widget_token" varchar NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "email" varchar NOT NULL, "role" varchar DEFAULT 'user', "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "support_chat_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "business_name" varchar, "created_at" datetime(6) NOT NULL, "enabled" boolean DEFAULT TRUE, "greeting_message" varchar DEFAULT 'Hi! How can we help you today?', "primary_color" varchar DEFAULT '#4F46E5', "updated_at" datetime(6) NOT NULL, "widget_position" varchar DEFAULT 'bottom-right', "widget_token" varchar NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_settings_on_widget_token" ON "support_chat_settings" ("widget_token")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "asupport_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "email" varchar NOT NULL, "role" varchar DEFAULT 'user', "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id" ON "asupport_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_settings_on_widget_token" ON "support_chat_settings" ("widget_token")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "support_chat_conversations" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "guest_email" varchar NOT NULL, "guest_name" varchar NOT NULL, "last_message_at" datetime, "page_url" varchar, "session_token" varchar NOT NULL, "status" varchar DEFAULT 'open' NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id" ON "asupport_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_settings"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_last_message_at" ON "support_chat_conversations" ("last_message_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id_and_created_at" ON "asupport_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_conversations_on_session_token" ON "support_chat_conversations" ("session_token")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "business_name" varchar, "created_at" datetime(6) NOT NULL, "enabled" boolean DEFAULT TRUE, "greeting_message" varchar DEFAULT 'Hi! How can we help you today?', "primary_color" varchar DEFAULT '#4F46E5', "updated_at" datetime(6) NOT NULL, "widget_position" varchar DEFAULT 'bottom-right', "widget_token" varchar NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_conversations_on_status" ON "support_chat_conversations" ("status")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_settings_on_widget_token" ON "support_chat_settings" ("widget_token")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "email" varchar NOT NULL, "role" varchar DEFAULT 'user', "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "asupport_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "support_chat_messages"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "email" varchar NOT NULL, "role" varchar DEFAULT 'user', "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_messages"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id_and_created_at" ON "asupport_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_fa9c5b415b"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "support_chat_conversations" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "support_chat_messages"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "asupport_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "support_chat_messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_settings"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "support_chat_messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "asupport_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "asupport_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_settings"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id" ON "asupport_chat_messages" ("conversation_id")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "asupport_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_settings"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id" ON "asupport_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "asupport_chat_messages"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "support_chat_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "business_name" varchar, "created_at" datetime(6) NOT NULL, "enabled" boolean DEFAULT TRUE, "greeting_message" varchar DEFAULT 'Hi! How can we help you today?', "primary_color" varchar DEFAULT '#4F46E5', "updated_at" datetime(6) NOT NULL, "widget_position" varchar DEFAULT 'bottom-right', "widget_token" varchar NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "support_chat_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "business_name" varchar, "created_at" datetime(6) NOT NULL, "enabled" boolean DEFAULT TRUE, "greeting_message" varchar DEFAULT 'Hi! How can we help you today?', "primary_color" varchar DEFAULT '#4F46E5', "updated_at" datetime(6) NOT NULL, "widget_position" varchar DEFAULT 'bottom-right', "widget_token" varchar NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id_and_created_at" ON "asupport_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_fa9c5b415b"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "support_chat_conversations" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_settings_on_widget_token" ON "support_chat_settings" ("widget_token")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "support_chat_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "business_name" varchar, "created_at" datetime(6) NOT NULL, "enabled" boolean DEFAULT TRUE, "greeting_message" varchar DEFAULT 'Hi! How can we help you today?', "primary_color" varchar DEFAULT '#4F46E5', "updated_at" datetime(6) NOT NULL, "widget_position" varchar DEFAULT 'bottom-right', "widget_token" varchar NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_fa9c5b415b"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "support_chat_conversations" ("id")
+)[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "asupport_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "support_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id_and_created_at" ON "asupport_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_settings_on_widget_token" ON "support_chat_settings" ("widget_token")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "support_chat_messages"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "asupport_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_settings_on_widget_token" ON "support_chat_settings" ("widget_token")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "email" varchar NOT NULL, "role" varchar DEFAULT 'user', "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id" ON "asupport_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "asupport_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "support_chat_messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id_and_created_at" ON "asupport_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "asupport_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "support_chat_messages"[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "asupport_chat_messages"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "support_chat_messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "support_chat_messages"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "asupport_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "support_chat_settings"[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "asupport_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "asupport_chat_messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_fa9c5b415b"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "support_chat_conversations" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_fa9c5b415b"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "support_chat_conversations" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_fa9c5b415b"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "support_chat_conversations" ("id")
+)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "support_chat_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "business_name" varchar, "created_at" datetime(6) NOT NULL, "enabled" boolean DEFAULT TRUE, "greeting_message" varchar DEFAULT 'Hi! How can we help you today?', "primary_color" varchar DEFAULT '#4F46E5', "updated_at" datetime(6) NOT NULL, "widget_position" varchar DEFAULT 'bottom-right', "widget_token" varchar NOT NULL)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "email" varchar NOT NULL, "role" varchar DEFAULT 'user', "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE "asupport_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_support_chat_settings_on_widget_token" ON "support_chat_settings" ("widget_token")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id" ON "asupport_chat_messages" ("conversation_id")[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "email" varchar NOT NULL, "role" varchar DEFAULT 'user', "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "email" varchar NOT NULL, "role" varchar DEFAULT 'user', "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251025000004)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id_and_created_at" ON "asupport_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "asupport_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "asupport_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "asupport_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "support_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "support_chat_messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251025000004)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251025000003),
+(20251025000002),
+(20251025000001);[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "asupport_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "asupport_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "asupport_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "asupport_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_fa9c5b415b"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "support_chat_conversations" ("id")
+)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "asupport_chat_messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251025000004)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id" ON "asupport_chat_messages" ("conversation_id")[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-10-25 15:26:16.169215', '2025-10-25 15:26:16.169216') RETURNING "key"[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251025000003),
+(20251025000002),
+(20251025000001);[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id_and_created_at" ON "asupport_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251025000003),
+(20251025000002),
+(20251025000001);[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "asupport_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "support_chat_messages"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "support_chat_messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251025000004)[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "asupport_chat_messages"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "asupport_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251025000003),
+(20251025000002),
+(20251025000001);[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-10-25 15:26:16.170127', '2025-10-25 15:26:16.170128') RETURNING "key"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'c1a5973fd81403b2728018be79a1bf3fd71a9cc2', '2025-10-25 15:26:16.169912', '2025-10-25 15:26:16.169913') RETURNING "key"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "asupport_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-10-25 15:26:16.170826', '2025-10-25 15:26:16.170827') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_fa9c5b415b"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "support_chat_conversations" ("id")
+)[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'c1a5973fd81403b2728018be79a1bf3fd71a9cc2', '2025-10-25 15:26:16.171117', '2025-10-25 15:26:16.171117') RETURNING "key"[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251025000004)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251025000003),
+(20251025000002),
+(20251025000001);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'c1a5973fd81403b2728018be79a1bf3fd71a9cc2', '2025-10-25 15:26:16.171361', '2025-10-25 15:26:16.171361') RETURNING "key"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-10-25 15:26:16.171176', '2025-10-25 15:26:16.171180') RETURNING "key"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id" ON "asupport_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251025000004)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "asupport_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251025000004)[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-10-25 15:26:16.171826', '2025-10-25 15:26:16.171827') RETURNING "key"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id_and_created_at" ON "asupport_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251025000003),
+(20251025000002),
+(20251025000001);[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251025000003),
+(20251025000002),
+(20251025000001);[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "asupport_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "support_chat_messages"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'c1a5973fd81403b2728018be79a1bf3fd71a9cc2', '2025-10-25 15:26:16.172352', '2025-10-25 15:26:16.172353') RETURNING "key"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id" ON "asupport_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "support_chat_messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'c1a5973fd81403b2728018be79a1bf3fd71a9cc2', '2025-10-25 15:26:16.172392', '2025-10-25 15:26:16.172393') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id_and_created_at" ON "asupport_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "asupport_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "asupport_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "support_chat_messages"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "support_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_fa9c5b415b"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "support_chat_conversations" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-10-25 15:26:16.172728', '2025-10-25 15:26:16.172729') RETURNING "key"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id" ON "asupport_chat_messages" ("conversation_id")[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-10-25 15:26:16.173464', '2025-10-25 15:26:16.173466') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asupport_chat_messages_on_conversation_id_and_created_at" ON "asupport_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'c1a5973fd81403b2728018be79a1bf3fd71a9cc2', '2025-10-25 15:26:16.173954', '2025-10-25 15:26:16.173955') RETURNING "key"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_fa9c5b415b"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "support_chat_conversations" ("id")
+)[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'c1a5973fd81403b2728018be79a1bf3fd71a9cc2', '2025-10-25 15:26:16.174015', '2025-10-25 15:26:16.174016') RETURNING "key"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "asupport_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "support_chat_messages"[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "asupport_chat_messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "support_chat_messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "asupport_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "support_chat_messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" bigint, "content" text NOT NULL, "conversation_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "read_by_agent" boolean DEFAULT FALSE, "read_by_guest" boolean DEFAULT FALSE, "sender_type" varchar NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_fa9c5b415b"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "support_chat_conversations" ("id")
+)[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "asupport_chat_messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id_and_created_at" ON "support_chat_messages" ("conversation_id", "created_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "asupport_chat_messages"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "asupport_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251025000004)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "asupport_chat_messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251025000003),
+(20251025000002),
+(20251025000001);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_support_chat_messages_on_conversation_id" ON "support_chat_messages" ("conversation_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251025000004)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251025000003),
+(20251025000002),
+(20251025000001);[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at")
+                     SELECT "id","agent_id","content","conversation_id","created_at","read_by_agent","read_by_guest","sender_type","updated_at" FROM "asupport_chat_messages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-10-25 15:26:16.176732', '2025-10-25 15:26:16.176733') RETURNING "key"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "asupport_chat_messages"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+------------------------------------------------------------------
+SupportChat::SettingTest: test_validates_widget_position_inclusion
+------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'c1a5973fd81403b2728018be79a1bf3fd71a9cc2', '2025-10-25 15:26:16.177231', '2025-10-25 15:26:16.177231') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-10-25 15:26:16.176622', '2025-10-25 15:26:16.176623') RETURNING "key"[0m
+--------------------------------------------------------------
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+SupportChat::SettingTest: test_validates_widget_token_presence
+--------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251025000004)[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'c1a5973fd81403b2728018be79a1bf3fd71a9cc2', '2025-10-25 15:26:16.178326', '2025-10-25 15:26:16.178328') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251025000003),
+(20251025000002),
+(20251025000001);[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251025000004)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20251025000003),
+(20251025000002),
+(20251025000001);[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-10-25 15:26:16.179489', '2025-10-25 15:26:16.179490') RETURNING "key"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-10-25 15:26:16.180093', '2025-10-25 15:26:16.180094') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'c1a5973fd81403b2728018be79a1bf3fd71a9cc2', '2025-10-25 15:26:16.180801', '2025-10-25 15:26:16.180801') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'c1a5973fd81403b2728018be79a1bf3fd71a9cc2', '2025-10-25 15:26:16.181516', '2025-10-25 15:26:16.181525') RETURNING "key"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+---------------------------------------------------------
+SupportChat::SettingTest: test_defaults_to_correct_values
+---------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+---------------------------------------------------------------
+SupportChat::SettingTest: test_generates_widget_token_on_create
+---------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------------------------------
+SupportChat::SettingTest: test_current_returns_first_or_creates_setting
+-----------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+----------------------------------------------------------------
+SupportChat::SettingTest: test_validates_widget_token_uniqueness
+----------------------------------------------------------------
+  [1m[36mSupportChat::Setting Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_settings" WHERE "support_chat_settings"."widget_token" = ? LIMIT ?[0m  [["widget_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mSupportChat::Setting Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_settings" WHERE "support_chat_settings"."widget_token" = ? LIMIT ?[0m  [["widget_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mSupportChat::Setting Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "support_chat_settings"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Setting Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_settings" WHERE "support_chat_settings"."widget_token" = ? LIMIT ?[0m  [["widget_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mSupportChat::Setting Load (0.2ms)[0m  [1m[34mSELECT "support_chat_settings".* FROM "support_chat_settings" ORDER BY "support_chat_settings"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mSupportChat::Setting Create (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_settings" ("business_name", "created_at", "enabled", "greeting_message", "primary_color", "updated_at", "widget_position", "widget_token") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["business_name", nil], ["created_at", "2025-10-25 15:26:16.220437"], ["enabled", 1], ["greeting_message", "Hi! How can we help you today?"], ["primary_color", "#4F46E5"], ["updated_at", "2025-10-25 15:26:16.220437"], ["widget_position", "bottom-right"], ["widget_token", "[FILTERED]"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+-------------------------------------------------------------------------------
+SupportChat::Admin::MessagesControllerTest: test_create_requires_authentication
+-------------------------------------------------------------------------------
+  [1m[36mSupportChat::Setting Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_settings" WHERE "support_chat_settings"."widget_token" = ? LIMIT ?[0m  [["widget_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mSupportChat::Setting Create (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_settings" ("business_name", "created_at", "enabled", "greeting_message", "primary_color", "updated_at", "widget_position", "widget_token") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["business_name", nil], ["created_at", "2025-10-25 15:26:16.224599"], ["enabled", 1], ["greeting_message", "Hi! How can we help you today?"], ["primary_color", "#4F46E5"], ["updated_at", "2025-10-25 15:26:16.224599"], ["widget_position", "bottom-right"], ["widget_token", "[FILTERED]"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Setting Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_settings" WHERE "support_chat_settings"."widget_token" = ? LIMIT ?[0m  [["widget_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------------------------------
+SupportChat::Admin::MessagesControllerTest: test_create_validates_content_length
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+SupportChat::Admin::MessagesControllerTest: test_create_sends_message_from_agent
+--------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Setting Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_settings" WHERE "support_chat_settings"."widget_token" = ? LIMIT ?[0m  [["widget_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mSupportChat::Setting Create (0.2ms)[0m  [1m[32mINSERT INTO "support_chat_settings" ("business_name", "created_at", "enabled", "greeting_message", "primary_color", "updated_at", "widget_position", "widget_token") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["business_name", nil], ["created_at", "2025-10-25 15:26:16.227283"], ["enabled", 1], ["greeting_message", "Hi! How can we help you today?"], ["primary_color", "#4F46E5"], ["updated_at", "2025-10-25 15:26:16.227283"], ["widget_position", "bottom-right"], ["widget_token", "[FILTERED]"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Setting Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "support_chat_settings"[0m
+  [1m[36mSupportChat::Setting Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_settings" WHERE "support_chat_settings"."widget_token" = ? LIMIT ?[0m  [["widget_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mCACHE SupportChat::Setting Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "support_chat_settings"[0m
+  [1m[36mSupportChat::Setting Create (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_settings" ("business_name", "created_at", "enabled", "greeting_message", "primary_color", "updated_at", "widget_position", "widget_token") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["business_name", nil], ["created_at", "2025-10-25 15:26:16.228634"], ["enabled", 1], ["greeting_message", "Hi! How can we help you today?"], ["primary_color", "#4F46E5"], ["updated_at", "2025-10-25 15:26:16.228634"], ["widget_position", "bottom-right"], ["widget_token", "[FILTERED]"]]
+  [1m[36mSupportChat::Setting Load (0.2ms)[0m  [1m[34mSELECT "support_chat_settings".* FROM "support_chat_settings" ORDER BY "support_chat_settings"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+  [1m[36mCACHE SupportChat::Setting Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "support_chat_settings"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+------------------------------------------------------------------------
+SupportChat::Admin::MessagesControllerTest: test_create_requires_content
+------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+-----------------------------------------------------------------------------------------
+SupportChat::Admin::MessagesControllerTest: test_create_requires_support_agent_permission
+-----------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-------------------------------------------------------------
+SupportChat::SettingTest: test_validates_primary_color_format
+-------------------------------------------------------------
+  [1m[36mSupportChat::Setting Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_settings" WHERE "support_chat_settings"."widget_token" = ? LIMIT ?[0m  [["widget_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-------------------------------------------------------
+SupportChat::SettingTest: test_accepts_valid_hex_colors
+-------------------------------------------------------
+  [1m[36mSupportChat::Setting Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_settings" WHERE "support_chat_settings"."widget_token" = ? LIMIT ?[0m  [["widget_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+------------------------------------------------------------------------------------
+SupportChat::Admin::ConversationsControllerTest: test_index_works_for_support_agents
+------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+---------------------------------------------------------------------------------------
+SupportChat::Admin::ConversationsControllerTest: test_index_filters_by_status_parameter
+---------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+----------------------------------------------------------------------------------------
+SupportChat::Admin::ConversationsControllerTest: test_show_displays_conversation_details
+----------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+---------------------------------------------------------------------------------------------
+SupportChat::Admin::ConversationsControllerTest: test_index_requires_support_agent_permission
+---------------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------------------------------------------------------
+SupportChat::Admin::ConversationsControllerTest: test_index_shows_open_conversations_by_default
+-----------------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+---------------------------------------------------------------------------------------
+SupportChat::Admin::ConversationsControllerTest: test_show_marks_guest_messages_as_read
+---------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.358456"], ["email", "[FILTERED]"], ["role", "admin"], ["updated_at", "2025-10-25 15:26:16.358456"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.373015"], ["email", "[FILTERED]"], ["role", "admin"], ["updated_at", "2025-10-25 15:26:16.373015"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Conversation Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_conversations" WHERE "support_chat_conversations"."session_token" = ? LIMIT ?[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mSupportChat::Conversation Create (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_conversations" ("created_at", "guest_email", "guest_name", "last_message_at", "page_url", "session_token", "status", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.376759"], ["guest_email", "[FILTERED]"], ["guest_name", "John Doe"], ["last_message_at", nil], ["page_url", nil], ["session_token", "[FILTERED]"], ["status", "open"], ["updated_at", "2025-10-25 15:26:16.376759"]]
+  [1m[36mSupportChat::Conversation Update (0.0ms)[0m  [1m[33mUPDATE "support_chat_conversations" SET "last_message_at" = ? WHERE "support_chat_conversations"."id" = ?[0m  [["last_message_at", "2025-10-25 15:26:16.377450"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.378150"], ["email", "[FILTERED]"], ["role", "admin"], ["updated_at", "2025-10-25 15:26:16.378150"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.380355"], ["email", "[FILTERED]"], ["role", "user"], ["updated_at", "2025-10-25 15:26:16.380355"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Conversation Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_conversations" WHERE "support_chat_conversations"."session_token" = ? LIMIT ?[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mSupportChat::Conversation Create (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_conversations" ("created_at", "guest_email", "guest_name", "last_message_at", "page_url", "session_token", "status", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.385751"], ["guest_email", "[FILTERED]"], ["guest_name", "John Doe"], ["last_message_at", nil], ["page_url", nil], ["session_token", "[FILTERED]"], ["status", "open"], ["updated_at", "2025-10-25 15:26:16.385751"]]
+  [1m[36mSupportChat::Conversation Update (0.0ms)[0m  [1m[33mUPDATE "support_chat_conversations" SET "last_message_at" = ? WHERE "support_chat_conversations"."id" = ?[0m  [["last_message_at", "2025-10-25 15:26:16.386183"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.385959"], ["email", "[FILTERED]"], ["role", "admin"], ["updated_at", "2025-10-25 15:26:16.385959"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.378158"], ["email", "[FILTERED]"], ["role", "admin"], ["updated_at", "2025-10-25 15:26:16.378158"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Conversation Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_conversations" WHERE "support_chat_conversations"."session_token" = ? LIMIT ?[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.387711"], ["email", "[FILTERED]"], ["role", "admin"], ["updated_at", "2025-10-25 15:26:16.387711"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.388315"], ["email", "[FILTERED]"], ["role", "user"], ["updated_at", "2025-10-25 15:26:16.388315"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.391185"], ["email", "[FILTERED]"], ["role", "admin"], ["updated_at", "2025-10-25 15:26:16.391185"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.391725"], ["email", "[FILTERED]"], ["role", "user"], ["updated_at", "2025-10-25 15:26:16.391725"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.392626"], ["email", "[FILTERED]"], ["role", "admin"], ["updated_at", "2025-10-25 15:26:16.392626"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.395582"], ["email", "[FILTERED]"], ["role", "admin"], ["updated_at", "2025-10-25 15:26:16.395582"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Conversation Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_conversations" WHERE "support_chat_conversations"."session_token" = ? LIMIT ?[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.396826"], ["email", "[FILTERED]"], ["role", "user"], ["updated_at", "2025-10-25 15:26:16.396826"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Conversation Create (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_conversations" ("created_at", "guest_email", "guest_name", "last_message_at", "page_url", "session_token", "status", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.396969"], ["guest_email", "[FILTERED]"], ["guest_name", "John Doe"], ["last_message_at", nil], ["page_url", nil], ["session_token", "[FILTERED]"], ["status", "open"], ["updated_at", "2025-10-25 15:26:16.396969"]]
+  [1m[36mSupportChat::Conversation Create (0.7ms)[0m  [1m[32mINSERT INTO "support_chat_conversations" ("created_at", "guest_email", "guest_name", "last_message_at", "page_url", "session_token", "status", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.388083"], ["guest_email", "[FILTERED]"], ["guest_name", "John Doe"], ["last_message_at", nil], ["page_url", nil], ["session_token", "[FILTERED]"], ["status", "open"], ["updated_at", "2025-10-25 15:26:16.388083"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Conversation Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_conversations" WHERE "support_chat_conversations"."session_token" = ? LIMIT ?[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mSupportChat::Conversation Update (0.0ms)[0m  [1m[33mUPDATE "support_chat_conversations" SET "last_message_at" = ? WHERE "support_chat_conversations"."id" = ?[0m  [["last_message_at", "2025-10-25 15:26:16.398616"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Conversation Create (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_conversations" ("created_at", "guest_email", "guest_name", "last_message_at", "page_url", "session_token", "status", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.398879"], ["guest_email", "[FILTERED]"], ["guest_name", "John Doe"], ["last_message_at", nil], ["page_url", nil], ["session_token", "[FILTERED]"], ["status", "open"], ["updated_at", "2025-10-25 15:26:16.398879"]]
+  [1m[36mSupportChat::Conversation Update (0.0ms)[0m  [1m[33mUPDATE "support_chat_conversations" SET "last_message_at" = ? WHERE "support_chat_conversations"."id" = ?[0m  [["last_message_at", "2025-10-25 15:26:16.399348"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Conversation Update (0.1ms)[0m  [1m[33mUPDATE "support_chat_conversations" SET "last_message_at" = ? WHERE "support_chat_conversations"."id" = ?[0m  [["last_message_at", "2025-10-25 15:26:16.398750"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.399825"], ["email", "[FILTERED]"], ["role", "user"], ["updated_at", "2025-10-25 15:26:16.399825"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.401168"], ["email", "[FILTERED]"], ["role", "admin"], ["updated_at", "2025-10-25 15:26:16.401168"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.402848"], ["email", "[FILTERED]"], ["role", "user"], ["updated_at", "2025-10-25 15:26:16.402848"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Conversation Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_conversations" WHERE "support_chat_conversations"."session_token" = ? LIMIT ?[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Conversation Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_conversations" WHERE "support_chat_conversations"."session_token" = ? LIMIT ?[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mSupportChat::Conversation Create (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_conversations" ("created_at", "guest_email", "guest_name", "last_message_at", "page_url", "session_token", "status", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.404374"], ["guest_email", "[FILTERED]"], ["guest_name", "John Doe"], ["last_message_at", nil], ["page_url", nil], ["session_token", "[FILTERED]"], ["status", "open"], ["updated_at", "2025-10-25 15:26:16.404374"]]
+  [1m[36mSupportChat::Conversation Update (0.0ms)[0m  [1m[33mUPDATE "support_chat_conversations" SET "last_message_at" = ? WHERE "support_chat_conversations"."id" = ?[0m  [["last_message_at", "2025-10-25 15:26:16.404766"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.406272"], ["email", "[FILTERED]"], ["role", "admin"], ["updated_at", "2025-10-25 15:26:16.406272"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.406823"], ["email", "[FILTERED]"], ["role", "user"], ["updated_at", "2025-10-25 15:26:16.406823"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Conversation Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_conversations" WHERE "support_chat_conversations"."session_token" = ? LIMIT ?[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mSupportChat::Conversation Create (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_conversations" ("created_at", "guest_email", "guest_name", "last_message_at", "page_url", "session_token", "status", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.409432"], ["guest_email", "[FILTERED]"], ["guest_name", "John Doe"], ["last_message_at", nil], ["page_url", nil], ["session_token", "[FILTERED]"], ["status", "open"], ["updated_at", "2025-10-25 15:26:16.409432"]]
+  [1m[36mSupportChat::Conversation Create (1.6ms)[0m  [1m[32mINSERT INTO "support_chat_conversations" ("created_at", "guest_email", "guest_name", "last_message_at", "page_url", "session_token", "status", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.403787"], ["guest_email", "[FILTERED]"], ["guest_name", "John Doe"], ["last_message_at", nil], ["page_url", nil], ["session_token", "[FILTERED]"], ["status", "open"], ["updated_at", "2025-10-25 15:26:16.403787"]]
+  [1m[36mSupportChat::Conversation Update (0.0ms)[0m  [1m[33mUPDATE "support_chat_conversations" SET "last_message_at" = ? WHERE "support_chat_conversations"."id" = ?[0m  [["last_message_at", "2025-10-25 15:26:16.409847"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Conversation Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_conversations" WHERE "support_chat_conversations"."session_token" = ? LIMIT ?[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mSupportChat::Conversation Create (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_conversations" ("created_at", "guest_email", "guest_name", "last_message_at", "page_url", "session_token", "status", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.411108"], ["guest_email", "[FILTERED]"], ["guest_name", "John Doe"], ["last_message_at", nil], ["page_url", nil], ["session_token", "[FILTERED]"], ["status", "open"], ["updated_at", "2025-10-25 15:26:16.411108"]]
+  [1m[36mSupportChat::Conversation Update (0.0ms)[0m  [1m[33mUPDATE "support_chat_conversations" SET "last_message_at" = ? WHERE "support_chat_conversations"."id" = ?[0m  [["last_message_at", "2025-10-25 15:26:16.411530"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Conversation Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_conversations" WHERE "support_chat_conversations"."session_token" = ? LIMIT ?[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mSupportChat::Conversation Create (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_conversations" ("created_at", "guest_email", "guest_name", "last_message_at", "page_url", "session_token", "status", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.412896"], ["guest_email", "[FILTERED]"], ["guest_name", "John Doe"], ["last_message_at", nil], ["page_url", nil], ["session_token", "[FILTERED]"], ["status", "open"], ["updated_at", "2025-10-25 15:26:16.412896"]]
+  [1m[36mSupportChat::Conversation Update (0.0ms)[0m  [1m[33mUPDATE "support_chat_conversations" SET "last_message_at" = ? WHERE "support_chat_conversations"."id" = ?[0m  [["last_message_at", "2025-10-25 15:26:16.413360"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/support_chat/admin/conversations/1/messages" for 127.0.0.1 at 2025-10-25 16:26:16 +0100
+  [1m[36mSupportChat::Conversation Update (0.1ms)[0m  [1m[33mUPDATE "support_chat_conversations" SET "last_message_at" = ? WHERE "support_chat_conversations"."id" = ?[0m  [["last_message_at", "2025-10-25 15:26:16.410169"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Message Create (0.2ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("agent_id", "content", "conversation_id", "created_at", "read_by_agent", "read_by_guest", "sender_type", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["agent_id", nil], ["content", "Hello"], ["conversation_id", 1], ["created_at", "2025-10-25 15:26:16.424718"], ["read_by_agent", 0], ["read_by_guest", 0], ["sender_type", "guest"], ["updated_at", "2025-10-25 15:26:16.424718"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Conversation Exists? (19.9ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_conversations" WHERE "support_chat_conversations"."session_token" = ? LIMIT ?[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mSupportChat::Conversation Create (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_conversations" ("created_at", "guest_email", "guest_name", "last_message_at", "page_url", "session_token", "status", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.429299"], ["guest_email", "[FILTERED]"], ["guest_name", "John Doe"], ["last_message_at", nil], ["page_url", nil], ["session_token", "[FILTERED]"], ["status", "open"], ["updated_at", "2025-10-25 15:26:16.429299"]]
+  [1m[36mSupportChat::Conversation Update (0.0ms)[0m  [1m[33mUPDATE "support_chat_conversations" SET "last_message_at" = ? WHERE "support_chat_conversations"."id" = ?[0m  [["last_message_at", "2025-10-25 15:26:16.430001"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/support_chat/admin/conversations/1/messages" for 127.0.0.1 at 2025-10-25 16:26:16 +0100
+[ActionCable] Broadcasting to guest_5GIYwlPa8LKjE8PngShU9D5J3qp0BTx8w1h9Nr3zya4: {:id=>1, :content=>"Hello", :sender_type=>"guest", :created_at=>"2025-10-25T15:26:16Z"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Message Create (0.2ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("agent_id", "content", "conversation_id", "created_at", "read_by_agent", "read_by_guest", "sender_type", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["agent_id", nil], ["content", "Hello"], ["conversation_id", 1], ["created_at", "2025-10-25 15:26:16.445613"], ["read_by_agent", 0], ["read_by_guest", 0], ["sender_type", "guest"], ["updated_at", "2025-10-25 15:26:16.445613"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Message Create (0.2ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("agent_id", "content", "conversation_id", "created_at", "read_by_agent", "read_by_guest", "sender_type", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["agent_id", nil], ["content", "Hello"], ["conversation_id", 1], ["created_at", "2025-10-25 15:26:16.447108"], ["read_by_agent", 0], ["read_by_guest", 0], ["sender_type", "guest"], ["updated_at", "2025-10-25 15:26:16.447108"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------------------------------------------------
+SupportChat::Admin::ConversationsControllerTest: test_index_marks_unread_messages_as_read
+-----------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.450431"], ["email", "[FILTERED]"], ["role", "admin"], ["updated_at", "2025-10-25 15:26:16.450431"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.450936"], ["email", "[FILTERED]"], ["role", "user"], ["updated_at", "2025-10-25 15:26:16.450936"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Conversation Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_conversations" WHERE "support_chat_conversations"."session_token" = ? LIMIT ?[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mSupportChat::Message Create (1.1ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("agent_id", "content", "conversation_id", "created_at", "read_by_agent", "read_by_guest", "sender_type", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["agent_id", nil], ["content", "Hello"], ["conversation_id", 1], ["created_at", "2025-10-25 15:26:16.450613"], ["read_by_agent", 0], ["read_by_guest", 0], ["sender_type", "guest"], ["updated_at", "2025-10-25 15:26:16.450613"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Conversation Create (0.2ms)[0m  [1m[32mINSERT INTO "support_chat_conversations" ("created_at", "guest_email", "guest_name", "last_message_at", "page_url", "session_token", "status", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.451997"], ["guest_email", "[FILTERED]"], ["guest_name", "John Doe"], ["last_message_at", nil], ["page_url", nil], ["session_token", "[FILTERED]"], ["status", "open"], ["updated_at", "2025-10-25 15:26:16.451997"]]
+[ActionCable] Broadcasting to guest_gMPWnLVRhoDkueK2h0KGnsf-X6t6XS0uS6pUe429RBU: {:id=>1, :content=>"Hello", :sender_type=>"guest", :created_at=>"2025-10-25T15:26:16Z"}
+  [1m[36mSupportChat::Conversation Update (0.1ms)[0m  [1m[33mUPDATE "support_chat_conversations" SET "last_message_at" = ? WHERE "support_chat_conversations"."id" = ?[0m  [["last_message_at", "2025-10-25 15:26:16.452707"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Message Create (0.2ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("agent_id", "content", "conversation_id", "created_at", "read_by_agent", "read_by_guest", "sender_type", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["agent_id", nil], ["content", "Hello"], ["conversation_id", 1], ["created_at", "2025-10-25 15:26:16.453872"], ["read_by_agent", 0], ["read_by_guest", 0], ["sender_type", "guest"], ["updated_at", "2025-10-25 15:26:16.453872"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Message Create (0.3ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("agent_id", "content", "conversation_id", "created_at", "read_by_agent", "read_by_guest", "sender_type", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["agent_id", nil], ["content", "Hello"], ["conversation_id", 1], ["created_at", "2025-10-25 15:26:16.454230"], ["read_by_agent", 0], ["read_by_guest", 0], ["sender_type", "guest"], ["updated_at", "2025-10-25 15:26:16.454230"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActionCable] Broadcasting to guest_1NF0VoNhRjSB2HxXx5zJANnA-yhX7LVVxKKZe0bVtt0: {:id=>1, :content=>"Hello", :sender_type=>"guest", :created_at=>"2025-10-25T15:26:16Z"}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------------------------------------------
+SupportChat::Admin::ConversationsControllerTest: test_close_requires_authentication
+-----------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.456449"], ["email", "[FILTERED]"], ["role", "admin"], ["updated_at", "2025-10-25 15:26:16.456449"]]
+Processing by SupportChat::Admin::MessagesController#create as HTML
+[ActionCable] Broadcasting to guest_S17NjlFha2Z65DWtnC4n-psGXR1bPjx1rFO38F-1TOg: {:id=>1, :content=>"Hello", :sender_type=>"guest", :created_at=>"2025-10-25T15:26:16Z"}
+  Parameters: {"content"=>"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "conversation_id"=>"1"}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActionCable] Broadcasting to guest_A_jpyb5tGSutJApTOBcMuUWVuqr9HOfOUHfrxG5LsAw: {:id=>1, :content=>"Hello", :sender_type=>"guest", :created_at=>"2025-10-25T15:26:16Z"}
+Started POST "/support_chat/admin/conversations/1/messages" for 127.0.0.1 at 2025-10-25 16:26:16 +0100
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "email", "role", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.457870"], ["email", "[FILTERED]"], ["role", "user"], ["updated_at", "2025-10-25 15:26:16.457870"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Conversation Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "support_chat_conversations" WHERE "support_chat_conversations"."session_token" = ? LIMIT ?[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mSupportChat::Conversation Create (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_conversations" ("created_at", "guest_email", "guest_name", "last_message_at", "page_url", "session_token", "status", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-10-25 15:26:16.458872"], ["guest_email", "[FILTERED]"], ["guest_name", "John Doe"], ["last_message_at", nil], ["page_url", nil], ["session_token", "[FILTERED]"], ["status", "open"], ["updated_at", "2025-10-25 15:26:16.458872"]]
+  [1m[36mSupportChat::Conversation Update (0.0ms)[0m  [1m[33mUPDATE "support_chat_conversations" SET "last_message_at" = ? WHERE "support_chat_conversations"."id" = ?[0m  [["last_message_at", "2025-10-25 15:26:16.459122"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Message Create (0.1ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("agent_id", "content", "conversation_id", "created_at", "read_by_agent", "read_by_guest", "sender_type", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["agent_id", nil], ["content", "Hello"], ["conversation_id", 1], ["created_at", "2025-10-25 15:26:16.459657"], ["read_by_agent", 0], ["read_by_guest", 0], ["sender_type", "guest"], ["updated_at", "2025-10-25 15:26:16.459657"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+[ActionCable] Broadcasting to guest_TkNwSWtemjP0_1Axi989IAcrcwVQ2c91Ag2ON3c117A: {:id=>1, :content=>"Hello", :sender_type=>"guest", :created_at=>"2025-10-25T15:26:16Z"}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+Started POST "/support_chat/admin/conversations/1/messages" for 127.0.0.1 at 2025-10-25 16:26:16 +0100
+[ActionCable] Broadcasting to guest_hTnv8MvMkmG0quVR0DcRFx566ilXAPOPJnCloWv4g5Y: {:id=>1, :content=>"Hello", :sender_type=>"guest", :created_at=>"2025-10-25T15:26:16Z"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mSupportChat::Message Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "support_chat_messages"[0m
+Started POST "/support_chat/admin/conversations/1/messages" for 127.0.0.1 at 2025-10-25 16:26:16 +0100
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mSupportChat::Message Create (0.2ms)[0m  [1m[32mINSERT INTO "support_chat_messages" ("agent_id", "content", "conversation_id", "created_at", "read_by_agent", "read_by_guest", "sender_type", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["agent_id", nil], ["content", "Hello"], ["conversation_id", 1], ["created_at", "2025-10-25 15:26:16.474971"], ["read_by_agent", 0], ["read_by_guest", 0], ["sender_type", "guest"], ["updated_at", "2025-10-25 15:26:16.474971"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by SupportChat::Admin::MessagesController#create as HTML
+  Parameters: {"content"=>"Hello", "conversation_id"=>"1"}
+[ActionCable] Broadcasting to guest_6AAr7i0Lz0wQFNR-2HssH-m4Zu2iC2ErASJBWjBV2v8: {:id=>1, :content=>"Hello", :sender_type=>"guest", :created_at=>"2025-10-25T15:26:16Z"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+Processing by SupportChat::Admin::MessagesController#create as HTML
+  Parameters: {"conversation_id"=>"1"}
+Processing by SupportChat::Admin::MessagesController#create as HTML
+  Parameters: {"content"=>"How can I help you?", "conversation_id"=>"1"}
+Completed 500 Internal Server Error in 39ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 23.2ms)
+Processing by SupportChat::Admin::MessagesController#create as HTML
+  Parameters: {"content"=>"Hello", "conversation_id"=>"1"}
+Completed 500 Internal Server Error in 55ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 28.4ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+Completed 500 Internal Server Error in 22ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 6.7ms)
+Completed 500 Internal Server Error in 49ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 29.8ms)
+Completed 500 Internal Server Error in 40ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 27.8ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
