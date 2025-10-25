@@ -6,3 +6,19 @@
 /pkg/
 /spec/reports/
 /tmp/
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+/config/credentials/*.key
+
+# Ignore test dummy app secrets
+/test/dummy/config/master.key
+/test/dummy/config/credentials/*.key
+
+# Ignore all database files
+*.sqlite3
+*.sqlite3-*
+/test/dummy/db/*.sqlite3
+/test/dummy/db/*.sqlite3-*
+/test/dummy/log/*.log
+/test/dummy/tmp/
