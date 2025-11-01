@@ -134,18 +134,26 @@
   line-height: 1.5;
 }
 
-.__sc_widget__guest_form input {
+.__sc_widget__guest_form input,
+.__sc_widget__guest_form textarea {
   padding: 12px;
   border: 1px solid #D1D5DB;
   border-radius: 8px;
   font-size: 14px;
+  font-family: inherit;
   transition: border-color 0.2s;
 }
 
-.__sc_widget__guest_form input:focus {
+.__sc_widget__guest_form input:focus,
+.__sc_widget__guest_form textarea:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.__sc_widget__guest_form textarea {
+  resize: vertical;
+  min-height: 80px;
 }
 
 .__sc_widget__guest_form button {
@@ -300,4 +308,67 @@
 
 .__sc_widget__messages::-webkit-scrollbar-thumb:hover {
   background: #9CA3AF;
+}
+
+/* Actions Section */
+.__sc_widget__actions {
+  padding: 12px 16px;
+  background-color: white;
+  border-top: 1px solid #E5E7EB;
+  display: flex;
+  justify-content: center;
+}
+
+.__sc_widget__close_conversation_btn {
+  padding: 8px 16px;
+  background-color: #6B7280;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.__sc_widget__close_conversation_btn:hover {
+  background-color: #4B5563;
+}
+
+/* System Message */
+.__sc_widget__system_message {
+  text-align: center;
+  padding: 8px 12px;
+  background-color: #FEF3C7;
+  color: #92400E;
+  border-radius: 8px;
+  font-size: 13px;
+  margin: 8px 0;
+}
+
+/* Footer */
+.__sc_widget__footer {
+  padding: 10px 16px;
+  background-color: #F9FAFB;
+  border-top: 1px solid #E5E7EB;
+  text-align: center;
+  font-size: 12px;
+  color: #6B7280;
+}
+
+.__sc_widget__footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.__sc_widget__footer a:hover {
+  text-decoration: underline;
+}
+
+/* Disabled State */
+#__sc_widget__message_input:disabled,
+#__sc_widget__send:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

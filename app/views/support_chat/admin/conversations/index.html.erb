@@ -7,10 +7,10 @@
       class: "tab #{params[:status] == 'closed' ? 'active' : ''}" %>
 </div>
 
-<div class="conversation-list">
+<div class="conversation-list" id="conversation-list">
   <% if @conversations.any? %>
     <% @conversations.each do |conversation| %>
-      <%= link_to admin_conversation_path(conversation), class: "conversation-item" do %>
+      <%= link_to admin_conversation_path(conversation), class: "conversation-item", id: "conversation-#{conversation.id}" do %>
         <div class="conversation-header">
           <div class="conversation-guest">
             <%= conversation.guest_name %>
@@ -29,8 +29,93 @@
       <% end %>
     <% end %>
   <% else %>
-    <div class="empty-state">
+    <div class="empty-state" id="empty-state">
       <p>No <%= params[:status] == 'closed' ? 'closed' : 'open' %> conversations</p>
     </div>
   <% end %>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@rails/actioncable@7.0/app/assets/javascripts/actioncable.js"></script>
+<script>
+  // Subscribe to agents dashboard for real-time updates
+  const cable = ActionCable.createConsumer('/support_chat/cable');
+  const currentStatus = '<%= params[:status] || "open" %>';
+
+  cable.subscriptions.create(
+    { channel: 'SupportChat::AgentChannel' },
+    {
+      received: function(data) {
+        // Handle new conversations
+        if (data.type === 'new_conversation') {
+          // Only show if we're on the matching status tab
+          if (data.conversation.status === currentStatus) {
+            const conversationList = document.getElementById('conversation-list');
+            const emptyState = document.getElementById('empty-state');
+
+            // Remove empty state if it exists
+            if (emptyState) {
+              emptyState.remove();
+            }
+
+            // Create new conversation item
+            const conversationEl = document.createElement('a');
+            conversationEl.href = '/support_chat/admin/conversations/' + data.conversation.id;
+            conversationEl.className = 'conversation-item';
+            conversationEl.id = 'conversation-' + data.conversation.id;
+
+            conversationEl.innerHTML = `
+              <div class="conversation-header">
+                <div class="conversation-guest">
+                  ${escapeHtml(data.conversation.guest_name)}
+                  <span class="unread-badge">1</span>
+                </div>
+                <div class="conversation-time">
+                  just now
+                </div>
+              </div>
+              <div class="conversation-preview">
+                ${escapeHtml(data.conversation.guest_email)} • No messages yet
+              </div>
+            `;
+
+            // Prepend to list (newest first)
+            conversationList.insertBefore(conversationEl, conversationList.firstChild);
+          }
+        }
+
+        // Handle new messages - update the conversation item
+        if (data.conversation_id) {
+          const conversationEl = document.getElementById('conversation-' + data.conversation_id);
+          if (conversationEl && data.message.sender_type === 'guest') {
+            // Update unread badge
+            const badge = conversationEl.querySelector('.unread-badge');
+            if (badge) {
+              const currentCount = parseInt(badge.textContent) || 0;
+              badge.textContent = currentCount + 1;
+            } else {
+              const guestDiv = conversationEl.querySelector('.conversation-guest');
+              const newBadge = document.createElement('span');
+              newBadge.className = 'unread-badge';
+              newBadge.textContent = '1';
+              guestDiv.appendChild(newBadge);
+            }
+
+            // Update preview
+            const preview = conversationEl.querySelector('.conversation-preview');
+            const email = preview.textContent.split(' • ')[0];
+            preview.textContent = email + ' • ' + data.message.content.substring(0, 60);
+
+            // Move to top of list
+            conversationEl.parentElement.insertBefore(conversationEl, conversationEl.parentElement.firstChild);
+          }
+        }
+      }
+    }
+  );
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+</script>

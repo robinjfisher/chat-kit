@@ -35,6 +35,14 @@ module SupportChat
       )
 
       if conversation.save
+        # Create initial message if provided
+        if params[:initial_message].present?
+          conversation.messages.create!(
+            content: params[:initial_message],
+            sender_type: "guest"
+          )
+        end
+
         render json: {
           session_token: conversation.signed_session_token,
           conversation_id: conversation.id
@@ -75,7 +83,19 @@ module SupportChat
         }
       end
 
-      render json: { messages: messages }
+      render json: { messages: messages, conversation_status: conversation.status }
+    end
+
+    def close_conversation
+      conversation = Conversation.find_by_signed_token(params[:session_token])
+
+      return render json: { error: "Invalid session" }, status: :unauthorized unless conversation
+
+      if conversation.close!
+        render json: { success: true }, status: :ok
+      else
+        render json: { error: "Failed to close conversation" }, status: :unprocessable_entity
+      end
     end
 
     private

@@ -50,6 +50,7 @@
               <p class="__sc_widget__greeting">${this.config.greetingMessage}</p>
               <input type="text" id="__sc_widget__guest_name" placeholder="Your name" required />
               <input type="email" id="__sc_widget__guest_email" placeholder="Your email" required />
+              <textarea id="__sc_widget__initial_message" placeholder="How can we help you?" rows="3" required></textarea>
               <button id="__sc_widget__start_chat">Start Chat</button>
             </div>
 
@@ -63,6 +64,12 @@
                   rows="1"
                 ></textarea>
                 <button id="__sc_widget__send">Send</button>
+              </div>
+              <div class="__sc_widget__actions">
+                <button id="__sc_widget__close_conversation" class="__sc_widget__close_conversation_btn">Close Conversation</button>
+              </div>
+              <div class="__sc_widget__footer">
+                Powered by <a href="https://github.com/robinjfisher/chat-kit" target="_blank" rel="noopener noreferrer">ChatKit</a>
               </div>
             </div>
           </div>
@@ -92,11 +99,13 @@
       const startChatBtn = document.getElementById('__sc_widget__start_chat');
       const sendBtn = document.getElementById('__sc_widget__send');
       const messageInput = document.getElementById('__sc_widget__message_input');
+      const closeConversationBtn = document.getElementById('__sc_widget__close_conversation');
 
       bubble.addEventListener('click', () => this.toggleWindow());
       closeBtn.addEventListener('click', () => this.toggleWindow());
       startChatBtn.addEventListener('click', () => this.startConversation());
       sendBtn.addEventListener('click', () => this.sendMessage());
+      closeConversationBtn.addEventListener('click', () => this.closeConversation());
       messageInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
           e.preventDefault();
@@ -124,9 +133,10 @@
     startConversation: function() {
       const name = document.getElementById('__sc_widget__guest_name').value.trim();
       const email = document.getElementById('__sc_widget__guest_email').value.trim();
+      const initialMessage = document.getElementById('__sc_widget__initial_message').value.trim();
 
-      if (!name || !email) {
-        alert('Please enter your name and email');
+      if (!name || !email || !initialMessage) {
+        alert('Please fill in all fields');
         return;
       }
 
@@ -139,7 +149,8 @@
         body: JSON.stringify({
           guest_name: name,
           guest_email: email,
-          page_url: window.location.href
+          page_url: window.location.href,
+          initial_message: initialMessage
         })
       })
       .then(response => response.json())
@@ -170,7 +181,13 @@
         if (data.messages) {
           this.showChatInterface();
           data.messages.forEach(msg => this.displayMessage(msg));
-          this.connectWebSocket();
+
+          // Check if conversation is closed
+          if (data.conversation_status === 'closed') {
+            this.disableConversation();
+          } else {
+            this.connectWebSocket();
+          }
         } else {
           // Invalid session, clear it
           localStorage.removeItem('__sc_widget__session_token');
@@ -266,6 +283,61 @@
       const badge = document.getElementById('__sc_widget__unread_badge');
       badge.textContent = '0';
       badge.style.display = 'none';
+    },
+
+    closeConversation: function() {
+      if (!confirm('Are you sure you want to close this conversation?')) {
+        return;
+      }
+
+      fetch(`${this.config.apiUrl}/widget/conversations/close`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Widget-Token': this.config.widgetToken
+        },
+        body: JSON.stringify({
+          session_token: this.sessionToken
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          this.disableConversation();
+          alert('Conversation closed. Thank you for contacting us!');
+        } else {
+          alert('Failed to close conversation. Please try again.');
+        }
+      })
+      .catch(error => {
+        console.error('ChatKit error:', error);
+        alert('Connection error. Please try again.');
+      });
+    },
+
+    disableConversation: function() {
+      const messageInput = document.getElementById('__sc_widget__message_input');
+      const sendBtn = document.getElementById('__sc_widget__send');
+      const closeBtn = document.getElementById('__sc_widget__close_conversation');
+
+      // Disable input and buttons
+      messageInput.disabled = true;
+      messageInput.placeholder = 'This conversation is closed';
+      sendBtn.disabled = true;
+      closeBtn.style.display = 'none';
+
+      // Disconnect websocket if connected
+      if (this.channel) {
+        this.channel.unsubscribe();
+      }
+
+      // Add a system message
+      const messagesContainer = document.getElementById('__sc_widget__messages');
+      const systemMessage = document.createElement('div');
+      systemMessage.className = '__sc_widget__system_message';
+      systemMessage.textContent = 'This conversation has been closed.';
+      messagesContainer.appendChild(systemMessage);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
     },
 
     escapeHtml: function(text) {

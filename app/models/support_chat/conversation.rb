@@ -16,6 +16,7 @@ module SupportChat
 
     before_validation :generate_session_token, on: :create
     after_create :update_last_message_timestamp
+    after_create_commit :broadcast_new_conversation
 
     scope :open, -> { where(status: "open") }
     scope :closed, -> { where(status: "closed") }
@@ -52,6 +53,24 @@ module SupportChat
 
     def update_last_message_timestamp
       update_column(:last_message_at, Time.current)
+    end
+
+    def broadcast_new_conversation
+      # Broadcast new conversation to agents dashboard
+      ActionCable.server.broadcast(
+        "agents_dashboard",
+        {
+          type: "new_conversation",
+          conversation: {
+            id: id,
+            guest_name: guest_name,
+            guest_email: guest_email,
+            created_at: created_at.iso8601,
+            last_message_at: last_message_at.iso8601,
+            status: status
+          }
+        }
+      )
     end
   end
 end

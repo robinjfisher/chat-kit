@@ -10,6 +10,7 @@ SupportChat::Engine.routes.draw do
     post "conversations", to: "widget#create_conversation"
     post "messages", to: "widget#create_message"
     get "messages/:session_token", to: "widget#load_messages"
+    post "conversations/close", to: "widget#close_conversation"
   end
 
   # Admin dashboard endpoints (user-authenticated)
