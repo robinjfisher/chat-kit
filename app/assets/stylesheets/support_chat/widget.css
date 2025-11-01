@@ -335,6 +335,22 @@
   background-color: #4B5563;
 }
 
+.__sc_widget__new_conversation_btn {
+  padding: 8px 16px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.__sc_widget__new_conversation_btn:hover {
+  opacity: 0.9;
+}
+
 /* System Message */
 .__sc_widget__system_message {
   text-align: center;

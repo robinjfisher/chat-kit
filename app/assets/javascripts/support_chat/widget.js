@@ -67,6 +67,7 @@
               </div>
               <div class="__sc_widget__actions">
                 <button id="__sc_widget__close_conversation" class="__sc_widget__close_conversation_btn">Close Conversation</button>
+                <button id="__sc_widget__new_conversation" class="__sc_widget__new_conversation_btn" style="display: none;">Start New Conversation</button>
               </div>
               <div class="__sc_widget__footer">
                 Powered by <a href="https://github.com/robinjfisher/chat-kit" target="_blank" rel="noopener noreferrer">ChatKit</a>
@@ -100,12 +101,14 @@
       const sendBtn = document.getElementById('__sc_widget__send');
       const messageInput = document.getElementById('__sc_widget__message_input');
       const closeConversationBtn = document.getElementById('__sc_widget__close_conversation');
+      const newConversationBtn = document.getElementById('__sc_widget__new_conversation');
 
       bubble.addEventListener('click', () => this.toggleWindow());
       closeBtn.addEventListener('click', () => this.toggleWindow());
       startChatBtn.addEventListener('click', () => this.startConversation());
       sendBtn.addEventListener('click', () => this.sendMessage());
       closeConversationBtn.addEventListener('click', () => this.closeConversation());
+      newConversationBtn.addEventListener('click', () => this.startNewConversation());
       messageInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
           e.preventDefault();
@@ -159,6 +162,14 @@
           this.sessionToken = data.session_token;
           localStorage.setItem('__sc_widget__session_token', data.session_token);
           this.showChatInterface();
+
+          // Display the initial message
+          this.displayMessage({
+            content: initialMessage,
+            sender_type: 'guest',
+            created_at: new Date().toISOString()
+          });
+
           this.connectWebSocket();
         } else {
           alert('Failed to start conversation. Please try again.');
@@ -319,25 +330,71 @@
       const messageInput = document.getElementById('__sc_widget__message_input');
       const sendBtn = document.getElementById('__sc_widget__send');
       const closeBtn = document.getElementById('__sc_widget__close_conversation');
+      const newConversationBtn = document.getElementById('__sc_widget__new_conversation');
 
       // Disable input and buttons
       messageInput.disabled = true;
       messageInput.placeholder = 'This conversation is closed';
       sendBtn.disabled = true;
       closeBtn.style.display = 'none';
+      newConversationBtn.style.display = 'block';
 
       // Disconnect websocket if connected
       if (this.channel) {
         this.channel.unsubscribe();
       }
 
-      // Add a system message
+      // Add a system message if not already present
       const messagesContainer = document.getElementById('__sc_widget__messages');
-      const systemMessage = document.createElement('div');
-      systemMessage.className = '__sc_widget__system_message';
-      systemMessage.textContent = 'This conversation has been closed.';
-      messagesContainer.appendChild(systemMessage);
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      const existingSystemMessage = messagesContainer.querySelector('.__sc_widget__system_message');
+
+      if (!existingSystemMessage) {
+        const systemMessage = document.createElement('div');
+        systemMessage.className = '__sc_widget__system_message';
+        systemMessage.textContent = 'This conversation has been closed.';
+        messagesContainer.appendChild(systemMessage);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+    },
+
+    startNewConversation: function() {
+      // Clear the session token
+      localStorage.removeItem('__sc_widget__session_token');
+      this.sessionToken = null;
+
+      // Disconnect channel if still connected
+      if (this.channel) {
+        this.channel.unsubscribe();
+        this.channel = null;
+      }
+
+      // Reset the UI - hide chat, show form
+      const chatInterface = document.getElementById('__sc_widget__chat');
+      const guestForm = document.getElementById('__sc_widget__guest_form');
+      const messagesContainer = document.getElementById('__sc_widget__messages');
+
+      chatInterface.style.display = 'none';
+      guestForm.style.display = 'flex';
+
+      // Clear previous messages
+      messagesContainer.innerHTML = '';
+
+      // Reset form fields
+      document.getElementById('__sc_widget__guest_name').value = '';
+      document.getElementById('__sc_widget__guest_email').value = '';
+      document.getElementById('__sc_widget__initial_message').value = '';
+
+      // Reset input states
+      const messageInput = document.getElementById('__sc_widget__message_input');
+      const sendBtn = document.getElementById('__sc_widget__send');
+      const closeBtn = document.getElementById('__sc_widget__close_conversation');
+      const newConversationBtn = document.getElementById('__sc_widget__new_conversation');
+
+      messageInput.disabled = false;
+      messageInput.placeholder = 'Type your message...';
+      sendBtn.disabled = false;
+      closeBtn.style.display = 'block';
+      newConversationBtn.style.display = 'none';
     },
 
     escapeHtml: function(text) {
