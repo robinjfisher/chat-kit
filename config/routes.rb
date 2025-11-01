@@ -6,7 +6,7 @@ SupportChat::Engine.routes.draw do
 
   # Widget API endpoints (public, token-authenticated)
   scope :widget, as: :widget do
-    get "config", to: "widget#config"
+    get "config", to: "widget#widget_config"
     post "conversations", to: "widget#create_conversation"
     post "messages", to: "widget#create_message"
     get "messages/:session_token", to: "widget#load_messages"

@@ -16,7 +16,7 @@ module SupportChat
       @logger ||= Rails.logger
     end
 
-    def config
+    def widget_config
       setting = Setting.current
 
       render json: {
