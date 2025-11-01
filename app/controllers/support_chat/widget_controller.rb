@@ -8,14 +8,6 @@ module SupportChat
     # Disable parameter wrapping to avoid params being nested under "widget" key
     wrap_parameters false
 
-    # Disable instrumentation to avoid conflicts with host app gems like active_decorator
-    self._process_action_callbacks = []
-
-    # Provide a simple logger to avoid triggering host app's logger chain
-    def logger
-      @logger ||= Rails.logger
-    end
-
     def widget_config
       setting = Setting.current
 
