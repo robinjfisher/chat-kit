@@ -189,17 +189,22 @@ The dashboard allows you to:
 - Admin dashboard requires user authentication
 - All guest content is HTML-escaped to prevent XSS
 
-### ActionCable Setup
+### ActionCable Setup (Production)
 
-For production with multiple servers, configure Redis in `config/cable.yml`:
+**Redis is required for production** when running multiple Puma workers or web processes. Configure in `config/cable.yml`:
 
 ```yaml
 production:
   adapter: redis
   url: <%= ENV.fetch("REDIS_URL") %>
+  channel_prefix: your_app_production
 ```
 
-For single-server deployments, the async adapter works fine (no Redis required).
+**Why Redis is required:** The `async` adapter only works within a single process. With multiple Puma workers, messages broadcast in one worker won't reach WebSocket connections in other workers, causing messages to be randomly dropped. Redis enables message sharing across all processes.
+
+**Note:** You can use the same Redis instance for both caching and ActionCable - no need for separate instances.
+
+For development/test, the async adapter works fine (single process).
 
 ## Requirements
 
