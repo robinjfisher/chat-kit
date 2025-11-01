@@ -246,13 +246,60 @@
       border-radius: 8px;
       margin-bottom: 16px;
     }
+
+    .breadcrumb {
+      margin-bottom: 20px;
+    }
+
+    .breadcrumb-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #6B7280;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb-link:hover {
+      color: #4F46E5;
+    }
+
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 16px;
+    }
+
+    .header-link {
+      color: #4F46E5;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .header-link:hover {
+      opacity: 0.8;
+    }
   </style>
 </head>
 
 <body>
   <header>
     <div class="container">
-      <h1>ChatKit Admin</h1>
+      <div>
+        <h1>💬 ChatKit Admin</h1>
+      </div>
+      <div class="header-nav">
+        <%= link_to "Conversations", admin_conversations_path, class: "header-link" %>
+      </div>
     </div>
   </header>
 

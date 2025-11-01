@@ -8,7 +8,8 @@ module SupportChat
                   :support_agent_method,
                   :mailer_sender,
                   :email_notifications,
-                  :email_notification_delay
+                  :email_notification_delay,
+                  :new_conversation_email
 
     def initialize
       @user_class = "User"
@@ -18,6 +19,7 @@ module SupportChat
       @mailer_sender = "support@example.com"
       @email_notifications = true
       @email_notification_delay = 30 # minutes
+      @new_conversation_email = nil # Set to receive emails for new chats
     end
   end
 

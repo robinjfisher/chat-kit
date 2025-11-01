@@ -4,6 +4,21 @@ module SupportChat
   class NotificationMailer < ApplicationMailer
     default from: -> { SupportChat.configuration.mailer_sender }
 
+    def new_conversation_notification(conversation_id)
+      @conversation = Conversation.find_by(id: conversation_id)
+
+      return unless @conversation
+      return unless SupportChat.configuration.email_notifications
+      return unless SupportChat.configuration.new_conversation_email
+
+      @initial_message = @conversation.messages.first
+
+      mail(
+        to: SupportChat.configuration.new_conversation_email,
+        subject: "New chat from #{@conversation.guest_name}"
+      )
+    end
+
     def agent_reply_notification(conversation_id)
       @conversation = Conversation.find_by(id: conversation_id)
 

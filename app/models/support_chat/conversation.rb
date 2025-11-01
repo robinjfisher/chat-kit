@@ -17,6 +17,7 @@ module SupportChat
     before_validation :generate_session_token, on: :create
     after_create :update_last_message_timestamp
     after_create_commit :broadcast_new_conversation
+    after_create_commit :send_new_conversation_email
 
     scope :open, -> { where(status: "open") }
     scope :closed, -> { where(status: "closed") }
@@ -71,6 +72,14 @@ module SupportChat
           }
         }
       )
+    end
+
+    def send_new_conversation_email
+      return unless SupportChat.configuration.new_conversation_email
+
+      SupportChat::NotificationMailer
+        .new_conversation_notification(id)
+        .deliver_later
     end
   end
 end

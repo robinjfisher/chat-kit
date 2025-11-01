@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background-color: #4F46E5; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+    .content { background-color: #f9f9f9; padding: 20px; border-radius: 0 0 8px 8px; }
+    .message { background-color: white; padding: 15px; border-left: 4px solid #4F46E5; margin: 15px 0; }
+    .button { display: inline-block; background-color: #4F46E5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin-top: 15px; }
+    .footer { margin-top: 20px; font-size: 12px; color: #666; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>New Chat Started</h2>
+    </div>
+    <div class="content">
+      <p><strong>Guest:</strong> <%= @conversation.guest_name %> (<%= @conversation.guest_email %>)</p>
+      <p><strong>Started:</strong> <%= @conversation.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+      <% if @conversation.page_url.present? %>
+        <p><strong>Page:</strong> <%= link_to @conversation.page_url, @conversation.page_url %></p>
+      <% end %>
+
+      <% if @initial_message %>
+        <div class="message">
+          <strong>Initial message:</strong><br/>
+          <%= simple_format(@initial_message.content) %>
+        </div>
+      <% end %>
+
+      <a href="<%= Rails.application.routes.url_helpers.url_for(controller: 'support_chat/admin/conversations', action: 'show', id: @conversation.id, only_path: false) %>" class="button">View Conversation</a>
+
+      <div class="footer">
+        <p>This is an automated notification from your ChatKit support chat.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

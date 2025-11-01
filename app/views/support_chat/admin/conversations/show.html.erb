@@ -1,5 +1,9 @@
 <% content_for :title, "Conversation with #{@conversation.guest_name}" %>
 
+<div class="breadcrumb">
+  <%= link_to "← Back to Conversations", admin_conversations_path, class: "breadcrumb-link" %>
+</div>
+
 <% if notice %>
   <div class="notice"><%= notice %></div>
 <% end %>
@@ -54,7 +58,7 @@
                      close_admin_conversation_path(@conversation),
                      method: :post,
                      class: "btn btn-secondary",
-                     data: { confirm: "Close this conversation?" } %>
+                     data: { turbo: false, confirm: "Close this conversation?" } %>
       </div>
     <% end %>
   <% else %>

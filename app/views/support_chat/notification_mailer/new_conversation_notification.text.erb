@@ -1,0 +1,18 @@
+New Chat Started
+================
+
+Guest: <%= @conversation.guest_name %> (<%= @conversation.guest_email %>)
+Started: <%= @conversation.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+<% if @conversation.page_url.present? %>
+Page: <%= @conversation.page_url %>
+<% end %>
+
+<% if @initial_message %>
+Initial message:
+<%= @initial_message.content %>
+<% end %>
+
+View the conversation in your admin dashboard.
+
+---
+This is an automated notification from your ChatKit support chat.
